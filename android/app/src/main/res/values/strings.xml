@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeliveryMY</string>
+    <string name="app_tagline">Malaysia Lorry Transport Booking - Direct Deal</string>
+    <string name="press_again_to_exit">Tekan sekali lagi untuk keluar dari DeliveryMY</string>
+    <string name="location_permission_rationale">DeliveryMY memerlukan izin lokasi GPS untuk mengira jarak KM lori yang tepat.</string>
+    <string name="grant_permission">Benarkan</string>
+    <string name="deny_permission">Batal</string>
+    <string name="whatsapp_not_installed">WhatsApp tidak dipasang pada telefon anda.</string>
+    <string name="server_url">https://deliverymy.com</string>
+    <string name="default_distance_unit">KM</string>
+</resources>

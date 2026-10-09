@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#FF6B00</color>
+    <color name="primary_dark">#E65100</color>
+    <color name="primary_light">#FF9100</color>
+    <color name="secondary">#0D47A1</color>
+    <color name="secondary_light">#1976D2</color>
+    <color name="background">#F8F9FE</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="whatsapp_green">#25D366</color>
+    <color name="success_green">#00C853</color>
+    <color name="text_primary">#1A1A2E</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="divider">#E2E8F0</color>
+    <color name="status_bar_color">#FF6B00</color>
+    <color name="nav_bar_color">#FFFFFF</color>
+</resources>

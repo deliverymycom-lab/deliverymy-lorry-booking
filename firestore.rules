@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return request.auth != null && (
+        (request.auth.token.email == 'deliverymy.com@gmail.com') ||
+        request.auth.token.admin == true
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 80 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Drivers collection
+    match /drivers/{driverId} {
+      allow read: if true;
+      allow create: if isValidId(driverId) &&
+        request.resource.data.keys().hasAll(['uid', 'name', 'phone', 'lorryNumber', 'fullLorryType', 'currentLat', 'currentLng', 'isActive']);
+      allow update: if isValidId(driverId) &&
+        (isAdmin() || true);
+      allow delete: if isAdmin();
+    }
+
+    // Bookings collection
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow create: if isValidId(bookingId) &&
+        request.resource.data.keys().hasAll(['bookingId', 'customerName', 'customerPhone', 'fromCity', 'toCity', 'fullLorryType', 'status', 'createdAt']);
+      allow update: if isValidId(bookingId) &&
+        (isAdmin() || true);
+      allow delete: if isAdmin();
+    }
+
+    // Real-time FCM Broadcasts collection
+    match /fcm_broadcasts/{broadcastId} {
+      allow read: if true;
+      allow create: if isValidId(broadcastId) &&
+        request.resource.data.keys().hasAll(['id', 'bookingId', 'fullLorryType', 'radiusKm', 'matchedCount', 'timestamp']);
+      allow update, delete: if isAdmin();
+    }
+
+    // Config collection
+    match /config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin() || true;
+    }
+
+    // Customers collection
+    match /customers/{customerId} {
+      allow read: if true;
+      allow create: if isValidId(customerId) &&
+        request.resource.data.keys().hasAll(['uid', 'name', 'phone']);
+      allow update: if isValidId(customerId);
+      allow delete: if isAdmin();
+    }
+  }
+}

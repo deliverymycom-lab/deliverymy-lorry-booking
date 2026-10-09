@@ -1,0 +1,158 @@
+{
+  "entities": {
+    "Driver": {
+      "title": "Driver",
+      "description": "DeliveryMY driver profile, vehicle specifications, real-time GPS coordinates, and status",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique driver ID" },
+        "name": { "type": "string", "maxLength": 100, "description": "Driver full name" },
+        "email": { "type": "string", "format": "email", "maxLength": 120, "description": "Driver email address" },
+        "phone": { "type": "string", "maxLength": 30, "description": "Driver contact phone number" },
+        "lorryNumber": { "type": "string", "maxLength": 20, "description": "Vehicle registration plate number" },
+        "lorryTonnage": { "type": "string", "maxLength": 50, "description": "Vehicle tonnage category" },
+        "lorryBodyType": { "type": "string", "maxLength": 100, "description": "Vehicle body type" },
+        "fullLorryType": { "type": "string", "maxLength": 150, "description": "Full lorry type designation" },
+        "hasTailgate": { "type": "boolean", "description": "Whether lorry has hydraulic tailgate lift" },
+        "city": { "type": "string", "maxLength": 80, "description": "Operating city base" },
+        "area": { "type": "string", "maxLength": 100, "description": "Operating area or district" },
+        "myReferralCode": { "type": "string", "maxLength": 20, "description": "Unique driver referral code" },
+        "referredBy": { "type": "string", "maxLength": 20, "description": "Referral code of inviting driver" },
+        "referralCount": { "type": "number", "description": "Number of successful referrals" },
+        "isSubscribed": { "type": "boolean", "description": "Subscription status" },
+        "subscriptionExpiry": { "type": "string", "maxLength": 40, "description": "ISO timestamp of subscription expiry" },
+        "isApproved": { "type": "boolean", "description": "Admin verification status" },
+        "isBlocked": { "type": "boolean", "description": "Admin block status" },
+        "isActive": { "type": "boolean", "description": "Driver active safety switch status" },
+        "isAvailable": { "type": "boolean", "description": "Ready to accept immediate delivery orders" },
+        "isOnline": { "type": "boolean", "description": "Driver online presence status" },
+        "lastOnlineAt": { "type": "string", "maxLength": 40, "description": "Last online activity ISO timestamp" },
+        "currentLat": { "type": "number", "description": "Current latitude coordinate" },
+        "currentLng": { "type": "number", "description": "Current longitude coordinate" },
+        "returnLoad": { "type": "boolean", "description": "Whether driver offers empty return trip" },
+        "returnLoadFrom": { "type": "string", "maxLength": 100, "description": "Return load origin city" },
+        "returnLoadTo": { "type": "string", "maxLength": 100, "description": "Return load destination city" },
+        "returnLoadFromOriginal": { "type": "string", "maxLength": 100, "description": "Original return origin" },
+        "returnLoadToOriginal": { "type": "string", "maxLength": 100, "description": "Original return destination" },
+        "whatsappNotifyEnabled": { "type": "boolean", "description": "WhatsApp dispatch notification preference" },
+        "fcmToken": { "type": "string", "maxLength": 512, "description": "FCM device registration token for push broadcasts" },
+        "completedJobsCount": { "type": "number", "description": "Total completed trips" },
+        "totalKmCovered": { "type": "number", "description": "Total kilometers covered" },
+        "createdAt": { "type": "string", "maxLength": 40, "description": "Registration ISO timestamp" }
+      },
+      "required": ["uid", "name", "phone", "lorryNumber", "fullLorryType", "currentLat", "currentLng", "isActive"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Logistics delivery booking order with real-time status and matching",
+      "type": "object",
+      "properties": {
+        "bookingId": { "type": "string", "maxLength": 40, "description": "Unique booking identifier" },
+        "customerId": { "type": "string", "maxLength": 60, "description": "Customer user identifier" },
+        "customerName": { "type": "string", "maxLength": 100, "description": "Customer contact person name" },
+        "customerPhone": { "type": "string", "maxLength": 30, "description": "Customer contact phone" },
+        "fromAddress": { "type": "string", "maxLength": 300, "description": "Full pickup origin address" },
+        "toAddress": { "type": "string", "maxLength": 300, "description": "Full delivery destination address" },
+        "fromCity": { "type": "string", "maxLength": 80, "description": "Origin city name" },
+        "toCity": { "type": "string", "maxLength": 80, "description": "Destination city name" },
+        "fromLat": { "type": "number", "description": "Pickup latitude coordinate" },
+        "fromLng": { "type": "number", "description": "Pickup longitude coordinate" },
+        "toLat": { "type": "number", "description": "Dropoff latitude coordinate" },
+        "toLng": { "type": "number", "description": "Dropoff longitude coordinate" },
+        "distanceKM": { "type": "number", "description": "Road distance in kilometers" },
+        "distanceText": { "type": "string", "maxLength": 30, "description": "Human-formatted distance text" },
+        "estimatedTime": { "type": "string", "maxLength": 40, "description": "Estimated driving time" },
+        "lorryTonnage": { "type": "string", "maxLength": 50, "description": "Requested lorry tonnage" },
+        "lorryBodyType": { "type": "string", "maxLength": 100, "description": "Requested lorry body type" },
+        "fullLorryType": { "type": "string", "maxLength": 150, "description": "Full requested vehicle type" },
+        "hasTailgate": { "type": "boolean", "description": "Requires tailgate lift" },
+        "goodsType": { "type": "string", "maxLength": 200, "description": "Description of goods transported" },
+        "dateTime": { "type": "string", "maxLength": 80, "description": "Pickup timing string" },
+        "note": { "type": "string", "maxLength": 500, "description": "Customer special instructions" },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "PENDING_RETURN_LOAD", "ACCEPTED", "ON_THE_WAY", "COMPLETED", "CANCELLED"],
+          "description": "Current lifecycle status of delivery order"
+        },
+        "isReturnLoadOffer": { "type": "boolean", "description": "Whether order was created from a driver return load promo" },
+        "returnLoadDriverId": { "type": "string", "maxLength": 60, "description": "Driver ID who posted the return load" },
+        "driverId": { "type": "string", "maxLength": 60, "description": "Accepted driver ID" },
+        "driverName": { "type": "string", "maxLength": 100, "description": "Accepted driver name" },
+        "driverPhone": { "type": "string", "maxLength": 30, "description": "Accepted driver contact phone" },
+        "lorryNumber": { "type": "string", "maxLength": 20, "description": "Accepted driver vehicle number" },
+        "createdAt": { "type": "string", "maxLength": 40, "description": "Creation ISO timestamp" },
+        "acceptedAt": { "type": "string", "maxLength": 40, "description": "Acceptance ISO timestamp" },
+        "onTheWayAt": { "type": "string", "maxLength": 40, "description": "In transit ISO timestamp" },
+        "completedAt": { "type": "string", "maxLength": 40, "description": "Completion ISO timestamp" },
+        "broadcastDriverIds": { "type": "string", "maxLength": 500, "description": "Comma-separated list of driver IDs who received real-time broadcast" }
+      },
+      "required": ["bookingId", "customerName", "customerPhone", "fromCity", "toCity", "fullLorryType", "status", "createdAt"]
+    },
+    "FcmBroadcast": {
+      "title": "FcmBroadcast",
+      "description": "Record of broadcast push notifications dispatched to drivers within 10km radius",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50, "description": "Broadcast unique event ID" },
+        "bookingId": { "type": "string", "maxLength": 40, "description": "Associated booking ID" },
+        "fullLorryType": { "type": "string", "maxLength": 150, "description": "Vehicle type filtered" },
+        "pickupLat": { "type": "number", "description": "Pickup latitude center" },
+        "pickupLng": { "type": "number", "description": "Pickup longitude center" },
+        "radiusKm": { "type": "number", "description": "Search radius in km" },
+        "matchedCount": { "type": "number", "description": "Number of matching drivers" },
+        "targetDriverUids": { "type": "string", "maxLength": 500, "description": "Comma-separated matched driver IDs" },
+        "title": { "type": "string", "maxLength": 150, "description": "Push notification headline" },
+        "body": { "type": "string", "maxLength": 400, "description": "Push notification message body" },
+        "timestamp": { "type": "string", "maxLength": 40, "description": "Broadcast ISO timestamp" }
+      },
+      "required": ["id", "bookingId", "fullLorryType", "radiusKm", "matchedCount", "timestamp"]
+    },
+    "AppConfig": {
+      "title": "AppConfig",
+      "description": "System configuration parameters and settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 40, "description": "Config document key" },
+        "approvalMode": { "type": "string", "enum": ["auto", "manual"], "description": "Driver registration verification mode" },
+        "updatedAt": { "type": "string", "maxLength": 40, "description": "Last updated ISO timestamp" }
+      },
+      "required": ["id", "approvalMode"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Customer registered profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 60, "description": "Customer unique ID" },
+        "name": { "type": "string", "maxLength": 100, "description": "Customer name" },
+        "email": { "type": "string", "format": "email", "maxLength": 120, "description": "Customer email" },
+        "phone": { "type": "string", "maxLength": 30, "description": "Customer phone" },
+        "preferredLanguage": { "type": "string", "maxLength": 10, "description": "Language code" },
+        "createdAt": { "type": "string", "maxLength": 40, "description": "Registration ISO timestamp" }
+      },
+      "required": ["uid", "name", "phone"]
+    }
+  },
+  "firestore": {
+    "/drivers/{driverId}": {
+      "schema": "Driver",
+      "description": "Registered driver profiles, location, vehicle attributes, and active status"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Customer delivery orders, status tracking, vehicle matching, and assignments"
+    },
+    "/fcm_broadcasts/{broadcastId}": {
+      "schema": "FcmBroadcast",
+      "description": "Real-time FCM push notifications sent to matching drivers within 10km radius"
+    },
+    "/config/{configId}": {
+      "schema": "AppConfig",
+      "description": "Global operational configuration for DeliveryMY"
+    },
+    "/customers/{customerId}": {
+      "schema": "Customer",
+      "description": "Customer accounts"
+    }
+  }
+}

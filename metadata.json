@@ -1,0 +1,10 @@
+{
+  "name": "Remix DeliveryMY - Malaysia Lorry Transport Booking",
+  "description": "Direct deal Malaysia lorry transport booking platform with trilingual support (BM/EN/中文), Return Load system, and zero-commission direct WhatsApp negotiation.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

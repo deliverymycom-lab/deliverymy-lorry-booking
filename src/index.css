@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@layer utilities {
+  /* Premium Malaysia Lorry Theme Backgrounds */
+  .bg-scaffold {
+    background-color: #F8F9FE;
+  }
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #FF6B00 0%, #FF9100 100%);
+  }
+
+  .bg-gradient-blue {
+    background: linear-gradient(135deg, #0D47A1 0%, #1976D2 100%);
+  }
+
+  .bg-gradient-return-load {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  }
+
+  .bg-gradient-success {
+    background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+  }
+
+  .bg-gradient-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  }
+
+  .bg-gradient-call {
+    background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+  }
+
+  /* Premium Card & Shadow tokens */
+  .card-premium {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #F0F0F0;
+  }
+
+  .shadow-card-soft {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-btn-orange {
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.30);
+  }
+
+  .shadow-btn-orange:hover {
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.40);
+  }
+
+  .shadow-btn-green {
+    box-shadow: 0 6px 20px rgba(0, 200, 83, 0.30);
+  }
+
+  @keyframes lorryDrive {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-2px) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(0.5px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-1.5px) rotate(1deg);
+    }
+  }
+
+  .animate-lorry-drive {
+    animation: lorryDrive 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+
+  /* Smooth mobile scrolling & overscroll behavior */
+  html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
